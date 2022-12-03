@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+
+    <div class="navbar sticky-top navbar-light bg-light">
+        <div class="container-fluid menu justify-content-center">
+            <ul class="nav nav-pills mt-3">
+                <li class="nav-item"> <a class="item nav-link" aria-current="page" href="/">Início</a></li>
+                <li class="nav-item"><a class="item <%= active %> <%= negrito %> text-light nav-link" href="/cadastrar-os">Cadastrar O.S.</a></li>
+                <li class="nav-item"><a class="item nav-link" href="/teste">Testes</a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+
+            <div class='col-12'>
+                <div class="titulos mt-2 mb-2">
+                    <span class="titulos">
+                        <%= title %>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+
+        <div class="container text-center">
+
+            <form class="mt-3 mb-3 pb-2 container formulario-edicao-os" method="post" action="<%= action %>">
+
+                <div class="row align-items-center pt-2">
+
+                    <% if(mensagem !='Cadastrado com sucesso' && mensagem !=null){ %>
+                        <div class="col-12 <%= tempo_alerta %> mt-2">
+                            <div class="alert <%= alert %>" role="alert">
+                                <%= mensagem %>
+                            </div>
+                        </div>
+                        <% } else if(mensagem=='Cadastrado com sucesso' ) { %>
+                            <div class="col-12 <%= tempo_alerta %> mt-2">
+                                <div class="alert <%= alert %>" role="alert">
+                                    <%= mensagem %>
+                                </div>
+                            </div>
+                            <% } %>
+
+                                <div class="mb-2 mt-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanOs">Nº O.S.</span>
+                                        <input type="text" class="form-control " name="iptOs" placeholder="Nº O.S"
+                                            aria-label="Os" aria-describedby="spanOs">
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="selectTipo">
+                                            Tipo
+                                        </label>
+                                        <select class="form-select" name="selTipo" id="selectTipo">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="-">-</option>
+                                            <option value="A-1">A-1</option>
+                                            <option value="A-2">A-2</option>
+                                            <option value="A-3">A-3</option>
+                                            <option value="SUDES">SUDES</option>
+                                            <option value="A-402">A-402</option>
+                                            <option value="A-413">A-413</option>
+                                            <option value="A-414"> A-414</option>
+                                            <option value="A-417"> A-417</option>
+                                            <option value="E-401">E-401</option>
+                                            <option value="E-404">E-404</option>
+                                            <option value="B-405">B-405</option>
+                                            <option value="B-437">B-437</option>
+                                            <option value="B-438">B-438</option>
+                                            <option value="G-416">G-416</option>
+                                            <option value="SIMPLIFICADO/PARTICULAR">SIMPLIFICADO/PARTICULAR</option>
+                                            <option value="COMPLETO/PARTICULAR">COMPLETO/PARTICULAR</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="SelectBanco">
+                                            Banco
+                                        </label>
+                                        <select class="form-select" name="selBanco" id="SelectBanco">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="BANCO DO BRASIL">BANCO DO BRASIL</option>
+                                            <option value="CEF">CEF</option>
+                                            <option value="BRB">BRB</option>
+                                            <option value="POUPEX">POUPEX</option>
+                                            <option value="FHE">FHE</option>
+                                            <option value="BANCO INTER">BANCO INTER</option>
+                                            <option value="PARTICULAR/OUTRO">PARTICULAR/OUTRO</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="SelectEmpresa">
+                                            Empresa
+                                        </label>
+                                        <select class="form-select" name="selEmpresa" id="SelectEmpresa">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="MAMCK">MAMCK</option>
+                                            <option value="HAVALIA">HAVALIA</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-text id=" spanProponente">Proponente</span>
+                                        <input type="text" class="form-control" aria-label="Proponente"
+                                            aria-describedby="spanProponente" placeholder="Proponente"
+                                            name="iptProponente" title="PROPONENTE" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="spanContato">Contato</span>
+                                        <input type="text" class="form-control" aria-label="Contato"
+                                            aria-describedby="spanContato" placeholder="Contato/Telefone"
+                                            name="iptContato" title="CONTATO" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label for="selectCidade" class="input-group-text">
+                                            Cidade
+                                        </label>
+                                        <select class="form-select" name="selCidade" id="selectCidade">
+                                            <option value="Selecione">Selecione</option>
+                                            <% if(cidades && cidades.length > 0) { 
+                                                cidades.forEach(function(cidade){
+                                            %>
+                                            <option value="<%= cidade.nome_cidade %>"><%= cidade.nome_cidade %></option>
+                                            <% })}; %>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label for="selectUf" class="input-group-text">
+                                            UF
+                                        </label>
+                                        <select class="form-select" name="selUf" id="selectUf">
+                                            <option value="Selecione">Selecione</option>
+                                            <% 
+                                                if(ufs && ufs.length > 0) { 
+                                                    ufs.forEach(function(uf){    
+                                            %>
+                                            <option value="<%= uf.uf %>"><%= uf.uf %></option>
+                                            <% })}; %>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label for="selectTipologia" class="input-group-text">
+                                            Tipologia
+                                        </label>
+                                        <select class="form-select" name="selTipologia" id="selectTipologia">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="CASA TÉRREA">CASA TÉRREA</option>
+                                            <option value="SOBRADO">SOBRADO</option>
+                                            <option value="APARTAMENTO">APARTAMENTO</option>
+                                            <option value="APARTAMENTO DUPLEX">APARTAMENTO DUPLEX</option>
+                                            <option value="APARTAMENTO TRIPLEX">APARTAMENTO TRIPLEX </option>
+                                            <option value="COBERTURA">COBERTURA</option>
+                                            <option value="COBERTURA DUPLEX">COBERTURA DUPLEX</option>
+                                            <option value="COBERTURA TRIPLEX">COBERTURA TRIPLEX</option>
+                                            <option value="KITNET">KITNET</option>
+                                            <option value="SALA COMERCIAL">SALA COMERCIAL</option>
+                                            <option value="LOJA">LOJA</option>
+                                            <option value="ANDAR CORRIDO">ANDAR CORRIDO</option>
+                                            <option value="PRÉDIO INTEIRO">PRÉDIO INTEIRO</option>
+                                            <option value="EMPREENDIMENTO">EMPREENDIMENTO</option>
+                                            <option value="TERRENO">TERRENO</option>
+                                            <option value="GLEBA">GLEBA</option>
+                                            <option value="OUTROS">OUTROS</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanCep">CEP</span>
+                                        <input type="text" class="form-control" aria-label="CEP"
+                                            aria-describedby="spanCep" placeholder="CEP" name="iptCep" value="Ligar API"
+                                            disabled required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="spanEndereco">Endereço</span>
+                                        <input type="text" class="form-control" aria-label="Endereco"
+                                            aria-describedby="spanEndereco" placeholder="Digite o endereço"
+                                            name="iptEndereco" title="ENDEREÇO" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanCondominio">
+                                            Condomínio</span>
+                                        <input type="text" class="form-control" aria-label="Condomínio"
+                                            aria-describeby="spanCondominio" placeholder="Digite o nome do condomínio"
+                                            name="iptCondominio" title="CONDOMÍNIO" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanBairro">Bairro</span>
+                                        <input type="text" class="form-control" aria-label="Bairro"
+                                            aria-describedby="spanBairro" placeholder="Digite o bairro" name="iptBairro"
+                                            title="BAIRRO" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span id="spanDataReceb" class="input-group-text">
+                                            Data receb.
+                                        </span>
+                                        <input type="date" class="form-control" name="iptDataReceb"
+                                            aria-label="Data Recebida" aria-describedby="spanDataReceb">
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span id="spanDataEntrega" class="input-group-text">
+                                            Data Entrega
+                                        </span>
+                                        <input type="date" class="form-control" name="iptDataEntrega"
+                                            aria-label="Data de Entrega" aria-describedby="spanDataEntrega">
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanValorServico">Vl. do Serviço
+                                            (R$)</span>
+                                        <input type="text" class="form-control" aria-label="Valor Servico"
+                                            aria-describedby="spanValorServico" placeholder="Valor do Serviço"
+                                            name="iptValorServ" title="VALOR DO SERVIÇO" requerid>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanValorDeslocamento">Vl.
+                                            Desloc. (R$)</span>
+                                        <input type="text" class="form-control" aria-label="Valor Deslocamento"
+                                            aria-describedby="spanValorDeslocamento" placeholder="Valor Desl."
+                                            name="iptValorDesloc" title="VALOR DESLOCAMENTO" requerid>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanAreaEdificada">Área edif.
+                                            (m²)</span>
+                                        <input type="text" class="form-control" aria-label="Area Edificada"
+                                            aria-describedby="spanAreaEdificada" placeholder="Área Edificada"
+                                            name="iptAreaEdif" title="ÁREA CONSTRUÍDA" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanAreaTerreno">Área do Terreno
+                                            (m²)</span>
+                                        <input type="text" class="form-control" aria-label="Area Terreno"
+                                            aria-describedby="spanAreaTerreno" placeholder="Área do Ter."
+                                            name="iptAreaTerreno" title="ÁREA DO TERRENO" required>
+                                    </div>
+                                </div>
+
+                                <!--
+                                <div class="mb-2 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label for="selectPadraoAcab" class="input-group-text">
+                                            Padrão de Acab.
+                                        </label>
+                                        <select class="form-select" name="selPadraoAcab" id="selectPadraoAcab">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="1">MÍNIMO (1)</option>
+                                            <option value="1">BAIXO (1)</option>
+                                            <option value="2">NORMAL/BAIXO (2)</option>
+                                            <option value="2">NORMAL (2)</option>
+                                            <option value="2">NORMAL/ALTO (2)</option>
+                                            <option value="3">ALTO (3)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                -->
+
+                                <!-- 
+                                <div class="mb-2 col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="selectNovo">
+                                            Novo
+                                        </label>
+                                        <select class="form-select" name="selNovo" id="selectNovo">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="S">SIM</option>
+                                            <option value="N">NÃO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                -->
+
+                                <!-- 
+                                <div class="mb-2 col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="selectLaje">
+                                            Laje
+                                        </label>
+                                        <select class="form-select" name="selLaje" id="selectLaje">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="S">SIM</option>
+                                            <option value="N">NÃO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                -->
+
+                                <!--
+                                <div class="mb-2 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="selectSituacao">
+                                            Situação
+                                        </label>
+                                        <select class="form-select" name="selSituacao" id="selectSituacao">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="-">-</option>
+                                            <option value="PEPT">PEPT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                -->
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="selectStatus">
+                                            Status
+                                        </label>
+                                        <select class="form-select" name="selStatus" id="selectStatus">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="-">-</option>
+                                            <option value="AGUARDANDO VISTORIA">AGUARDANDO VISTORIA</option>
+                                            <option value="VISTORIA REALIZADA">VISTORIA REALIZADA</option>
+                                            <option value="LAUDO PRONTO">LAUDO PRONTO</option>
+                                            <option value="AGUARDANDO CANCELAMENTO">AGUARDANDO CANCELAMENTO</option>
+                                            <option value="CANCELADA">CANCELADA</option>
+                                            <option value="SUSPENSA">SUSPENSA</option>
+                                            <option value="REVISÃO DE VALOR">REVISÃO DE VALOR</option>
+                                            <option value="TRIAGEM">TRIAGEM</option>
+                                            <option value="EM ANÁLISE">EM ANÁLISE</option>
+                                            <option value="AGUARDANDO MILITÃO">AGUARDANDO MILITÃO</option>
+                                            <option value="EM DIGITAÇÃO (I)">EM DIGITAÇÃO (I)</option>
+                                            <option value="EM DIGITAÇÃO (G)">EM DIGITAÇÃO (G)</option>
+                                            <option value="MILITÃO VAI DIGITAR">MILITÃO VAI DIGITAR</option>
+                                            <option value="FALTA INCLUIR LAUDO">FALTA INCLUIR LAUDO</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="selectStatusLista">
+                                            Status (Obs. da lista)
+                                        </label>
+                                        <select class="form-select" name="selStatusLista" id="selectStatusLista">
+                                            <option value="Selecione">Selecione</option>
+                                            <option value="-">-</option>
+                                            <option value="AGUARDANDO VISTORIA">AGUARDANDO VISTORIA</option>
+                                            <option value="IMPOSSIBILIDADE DE CONTATAR O CLIENTE">IMPOSSIBILIDADE DE
+                                                CONTATAR O
+                                                CLIENTE</option>
+                                            <option value="PEPT PENDÊNCIA DOCUMENTAL">PEPT PENDÊNCIA DOCUMENTAL</option>
+                                            <option value="SUSPENSA AGUARDANDO CANCELAMENTO">SUSPENSA AGUARDANDO
+                                                CANCELAMENTO
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 
+                                <div class="mb-2 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="sr-only input-group-text" id="spanValorAvaliacao">Valor de
+                                            Avaliação (R$)</span>
+                                        <input type="text" class="form-control" aria-label="Valor Avaliacao"
+                                            aria-describedby="spanValorAvaliacao" placeholder="Valor de Avaliação"
+                                            name="iptValorAvaliacao" title="VALOR DE AVALIAÇÃO">
+                                    </div>
+                                </div>
+                                -->
+
+                                <div class="mb-2 col-12">
+                                    <div class="input-group">
+                                        <label class="sr-only input-group-text"
+                                            for="labelObservacoesComplementares">Observações
+                                            Complementares</label>
+                                        <textarea type="text" class="form-control" id="labelObservacoesComplementares"
+                                            cols="100" rows="3"
+                                            placeholder="Observações Complementares para a Lista de Vistorias"
+                                            name="taObservacoes"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="mb-2 col-12">
+                                    <div class="input-group">
+                                        <label class="sr-only input-group-text" for="labelObservacoesIG">Observações
+                                            I/G</label>
+                                        <textarea type="text" class="form-control" id="labelObservacoesIG" cols="100"
+                                            rows="3" placeholder="Observações I/G" name="taObservacoesig"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-secondary" name="">Gravar</button>
+                                </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="/myjs/my.js"></script>
+</body>
+
+</html>

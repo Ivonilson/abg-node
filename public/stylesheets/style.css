@@ -1,0 +1,67 @@
+body {
+    margin: 0 auto;
+}
+
+li a {
+    color: darkgreen !important;
+    font-size: 20px !important;
+}
+
+.btn {
+    color: rgb(248, 249, 248) !important;
+    font-size: 20px !important;
+}
+
+a  {
+    color: rgb(243, 248, 243) !important;
+}
+
+.menu li :hover  {
+    background-color: burlywood !important;
+    color: rgb(243, 248, 243) !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    font-weight: bold;
+}
+
+.menu a :hover  {
+    color: rgb(243, 248, 243) !important;
+}
+
+.titulos {
+    font-size: 20px;
+    color: rgb(240, 231, 231);
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+div .titulos {
+    background-color: rgb(138, 136, 131);
+    margin: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0;
+    box-shadow: 3px 3px 3px 3px rgb(177, 184, 186);
+}
+
+.formulario-edicao-os {
+    border: 1px solid rgb(220, 220, 224);
+    box-shadow: -3px -3px 3px 3px rgb(177, 184, 186);
+}
+
+.btn {
+    font-weight: bold;
+    width: 100%;
+}
+
+.progresso > div {
+    margin: 0 auto;
+	background-color: #FF6347;
+    min-width: 100px;
+    max-width: 400px;
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
+}

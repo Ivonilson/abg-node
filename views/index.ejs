@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/dataTablesCss/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div class="navbar sticky-top navbar-light bg-light">
+    <div class="col-12 text-center">
+      <span>Usuário: <%= sessao %></span>
+     </div>
+    <div class="container-fluid menu justify-content-center">
+      <ul class="nav nav-pills mt-3"> 
+        <li class="nav-item"> <a class="item <%= active %> <%= negrito %> text-light nav-link" aria-current="page" href="/">Início</a></li>
+        <li class="nav-item"><a class="item nav-link" href="/cadastrar-os">Cadastrar O.S.</a></li>
+        <li class="nav-item"><a class="item nav-link" href="/teste">Testes</a></li>
+       </ul>
+    </div>
+
+    <div class="container">
+
+      <div class='col-12'>
+        <div class="titulos mt-2 mb-2">
+          <span class="titulos">
+            <%= title %>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 text-center">
+        <span style="font-size: 20px; font-weight: bold;">Total de registros: <%= results.length %></span>
+        <br><br>
+      </div>
+
+      <div barra-progresso="barraProgresso" class="progresso offset-4 col-4 offset-4">
+        <div class=" alert alert-success text-center" role="alert">
+          <span class="fw-bold"> 100% concluído </span> 
+         </div>
+      </div>
+
+      <span><mark><strong>Última atualização:</strong> às <%= ultima_atualizacao %>.</mark></span>
+
+    </div>
+  </div>
+
+  <div class="container border pt-3 pl-2 pr-2">
+    <div class="col-12">
+
+      <% if(mensagem != null){
+        %>
+            <div class="col-12 <%= tempo_alerta %> mt-2">
+                <div class="alert <%= alert %>" role="alert">
+                    <%= mensagem %>
+                 </div>
+            </div>
+        <%
+          }
+        %>  
+      <% 
+        let laudos_prontos = 0;
+        let quant_laudos = results.length;
+
+        if(results.length > 0) {
+
+      %>
+      <table id="table_id" class="display" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>N° O.S.</th>
+            <th>Empresa</th>
+            <th>Banco</th>
+            <th>Cidade</th>
+            <th>UF</th>
+            <th>Proponente</th>
+            <th>Endereço</th>
+            <th>Data Receb.</th>
+            <th>Data Entrega</th>
+            <th>Status</th>
+            <th>Observações I/G</th>
+            <th></th>
+            <th>Tipo</th>
+            <th>Contato</th>
+            <th>Tipologia</th>
+            <th>Condomínio</th>
+            <th>Bairro</th>
+            <th>CEP</th>
+            <th>Valor Serviço</th>
+            <th>Valor Deslocamento</th>
+            <th>Área construída(m²)</th>
+            <th>Área do Terreno(m²)</th>
+            <th>Padrão Acabamento</th>
+            <th>Laje</th>
+            <th>Novo</th>
+            <th>Valor de Avaliação(R$)</th>
+            <th>Observações para Lista</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% } %>
+        <tbody>
+            <% 
+              if(!results || results.length ==0 ) { 
+            %>
+            <tr>Não há dados disponíveis...</tr>
+            <% } else { results.forEach(function(demanda) {
+              if(demanda.status == 'LAUDO PRONTO' || demanda.status == 'CANCELADA'){
+                ++laudos_prontos;
+              }
+              let codigo_os = demanda.cod_os.replace('/', '-');
+            %>
+              <tr>
+                <td>
+                  <%= demanda.cod_os %>
+                </td>
+                <td>
+                  <%= demanda.empresa %>
+                </td>
+                <td>
+                  <%= demanda.banco %>
+                </td>
+                <td>
+                  <%= demanda.cidade %>
+                </td>
+                <td>
+                  <%= demanda.uf %>
+                </td>
+                <td>
+                  <%= demanda.proponente %>
+                </td>
+                <td>
+                  <%= demanda.observacoes %>
+                </td>
+                <td>
+                  <%= demanda.data_receb.getDate() + '/' + (demanda.data_receb.getMonth() + 1) + '/' + demanda.data_receb.getFullYear() %>
+                </td>
+                <td>
+                  <%= demanda.data_entrega.getDate() + '/' + (demanda.data_entrega.getMonth() + 1) + '/' + demanda.data_entrega.getFullYear() %>
+                </td>
+                <td>
+                  <%= demanda.status %>
+                </td>
+                <td>
+                  <%= demanda.notas_importantes %>
+                </td>
+                <td><a href="/edit/<%= codigo_os %>" class="btn btn-dark">Editar</a></td>
+                <td>
+                  <%= demanda.tipo %>
+                </td>
+                <td>
+                  <%= demanda.CONTATO %>
+                </td>
+                <td>
+                  <%= demanda.tipologia %>
+                </td>
+                <td>
+                  <%= demanda.condominio %>
+                </td>
+                <td>
+                  <%= demanda.bairro %>
+                </td>
+                <td>
+                  <%= demanda.cep %>
+                </td>
+                <td>
+                  <%= demanda.valor_servico.toLocaleString('pt-BR') %>
+                </td>
+                <td>
+                  <%= demanda.valor_deslocamento.toLocaleString('pt-BR') %>
+                </td>
+                <td>
+                  <%= demanda.area_construida.toLocaleString('pt-BR') %>
+                </td>
+                <td>
+                  <%= demanda.area_terreno.toLocaleString('pt-BR') %>
+                </td>
+                <td>
+                  <%= demanda.padrao_acabamento %>
+                </td>
+                <td>
+                  <%= demanda.LAJE %>
+                </td>
+                <td>
+                  <%= demanda.novo %>
+                </td>
+                <td>
+                  <%= demanda.valor_avaliacao != null ? demanda.valor_avaliacao.toLocaleString('pt-BR') : '0,00' %>
+                </td>
+                <td>
+                  <%= demanda.obs2 %>
+                </td>
+
+                <td><a href="/delete/<%= codigo_os %>" onclick="return confirm('Confirma a exclusão?');" class="btn btn-danger">Deletar</a></td>
+              </tr>
+              <% })} %>
+        </tbody>
+      <% if(results.length > 0) {  %>
+      </table>
+      <% } %>
+      <span id="qtdDemandas" class="status sr-only"><%= quant_laudos %></span>
+      <span id="qtdlaudoPronto" class="status sr-only"><%= laudos_prontos %></span>
+    </div>
+  </div>
+
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/jquery/jquery.min.js"></script>
+  <script src="/dataTablesJs/jquery.dataTables.min.js"></script>
+  <script src="/dataTablesResponsive/dataTables.responsive.min.js"></script>
+  <script src="/dataTablesResponsiveButtons/dataTables.buttons.min.js"></script>
+  <script src="/dataTablesResponsiveButtons/buttons.colVis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="/myjs/my.js"></script>
+  <script>
+     configurarBarra();
+  </script>
+</body>
+
+</html>
