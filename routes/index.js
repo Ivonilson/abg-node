@@ -9,8 +9,24 @@ function ultima_atualizacao () {
 '/' + (data_hora_atual.getMonth() + 1) +  '/' + data_hora_atual.getFullYear();
 };
 
-/* GET home page. */
 router.get('/', async function(req, res, next) {
+
+  try {
+
+    res.render('login', 
+    {
+      title: 'Login', mensagem: null,
+      alert: null, 
+      tempo_alerta: null,
+      negrito: 'fw-bold'
+    });
+  } catch (error){
+    res.redirect('/erro='+error);
+  }
+});
+
+/* GET home page. */
+/*router.get('/', async function(req, res, next) {
 
   try {
 
@@ -28,7 +44,7 @@ router.get('/', async function(req, res, next) {
   } catch (error){
     res.redirect('/erro='+error);
   }
-});
+});*/
 
 router.get('/cadastrar-os', async function(req, res, next){
   const cidades = await global.db.carregarcidade();

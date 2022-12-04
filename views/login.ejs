@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/signin.css">
+    <link rel="icon" href="images/abgoficial.ico">
+
+    <title>
+        <%= title %>
+    </title>
+</head>
+<body class="text-center">
+
+  <div class="div-login">
+
+	<form class="form-signin bg-light border rounded" method="post">
+      <img class="mb-4" src="images/abgoficial.png" alt="Abg Soluções" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal text">Área Restrita</h1>
+
+     <div class="form-group">
+        <label for="exampleInputEmail1" class="sr-only">Usuário</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="usuario" aria-describedby="Usuário" placeholder="Usuário" required>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="sr-only">Senha</label>
+        <input type="password" class="form-control" id="exampleInputPassword1"  name="senha" placeholder="Senha" required>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
+
+      <p class="mt-5 mb-3 text-muted">&copy;AbgSoluções 2022</p>
+  </form>
+</div>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+<script src="/myjs/my.js"></script>
+</body>
+</html>
