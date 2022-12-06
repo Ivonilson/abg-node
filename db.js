@@ -19,6 +19,11 @@ async function connect(){
 
 connect();
 
+async function login(){
+    const conn = await connect();
+    const result = await conn.query('')
+}
+
 async function demandasDoDia(){
     const conn = await connect();
     const [rows] = await conn.query(
