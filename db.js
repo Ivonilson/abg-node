@@ -19,9 +19,15 @@ async function connect(){
 
 connect();
 
-async function login(){
+async function login(usuario, senha){
     const conn = await connect();
-    const result = await conn.query('')
+    const sql = 'SELECT * FROM tbl_user WHERE user = ? && pass = ?;'
+    const result = await conn.query(sql, [usuario.user, usuario.pass]);
+    if(result.length > 0){
+        return result.length;
+    } else {
+        return false;
+    }
 }
 
 async function demandasDoDia(){
@@ -109,5 +115,5 @@ async function deletarOs(id){
 
 module.exports = {
     demandasDoDia, inserirOs, inserirTeste, carregarDadosTeste, selectOs, 
-    carregarcidade, carregarUF, editarOs, deletarOs
+    carregarcidade, carregarUF, editarOs, deletarOs, login
 };

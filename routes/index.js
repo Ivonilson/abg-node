@@ -11,14 +11,31 @@ function ultima_atualizacao () {
 
 router.get('/', async function(req, res, next) {
 
+    res.render('login', 
+    {
+      title: 'Login', mensagem: null,
+      alert: null, 
+      tempo_alerta: null,
+      negrito: 'fw-bold', 
+      login:  ''
+    });
+});
+
+router.post('/', async function(req, res, next) {
+
   try {
+
+    const user = req.body.user;
+    const pass = req.body.pass;
+    const login = await global.db.login({user, pass});
 
     res.render('login', 
     {
       title: 'Login', mensagem: null,
       alert: null, 
       tempo_alerta: null,
-      negrito: 'fw-bold'
+      negrito: 'fw-bold', 
+      login: login != null ? login : ''
     });
   } catch (error){
     res.redirect('/erro='+error);
