@@ -32,7 +32,12 @@
       </div>
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
-      <p>Login: <%= login %></p>
+      <% if(login.length > 0 ) {
+        login.forEach(function(valor){ %>
+      <p>Login: <%= valor.user %></p>
+      <p>Senha: <%= valor.pass %></p>
+      <br>
+      <% }) } %>
 
       <p class="mt-5 mb-3 text-muted">&copy;AbgSoluções 2022</p>
   </form>

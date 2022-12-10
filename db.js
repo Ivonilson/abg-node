@@ -19,12 +19,12 @@ async function connect(){
 
 connect();
 
-async function login(usuario, senha){
+async function login(user, pass){
     const conn = await connect();
-    const sql = 'SELECT * FROM tbl_user WHERE user = ? && pass = ?;'
-    const result = await conn.query(sql, [usuario.user, usuario.pass]);
+    const sql = 'SELECT * FROM tbl_user WHERE user = ? && pass = ? ;'
+    const [result] = await conn.query(sql, [user, pass]);
     if(result.length > 0){
-        return result.length;
+        return result;
     } else {
         return false;
     }

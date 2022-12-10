@@ -27,7 +27,7 @@ router.post('/', async function(req, res, next) {
 
     const user = req.body.user;
     const pass = req.body.pass;
-    const login = await global.db.login({user, pass});
+    const login = await global.db.login(user, pass);
 
     res.render('login', 
     {
@@ -35,7 +35,7 @@ router.post('/', async function(req, res, next) {
       alert: null, 
       tempo_alerta: null,
       negrito: 'fw-bold', 
-      login: login != null ? login : ''
+      login
     });
   } catch (error){
     res.redirect('/erro='+error);
