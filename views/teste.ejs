@@ -19,11 +19,15 @@
     <div class="navbar sticky-top navbar-light bg-light">
         <div class="container-fluid menu justify-content-center">
             <ul class="nav nav-pills mt-3">
-                <li class="nav-item"> <a class="item nav-link" aria-current="page" href="/">Início</a></li>
+                <li class="nav-item"> <a class="item nav-link" aria-current="page" href="demandas-do-dia">Início</a></li>
                 <li class="nav-item"><a class="item nav-link" href="/cadastrar-os">Cadastrar O.S.</a></li>
                 <li class="nav-item"><a class="item <%= active %> <%= negrito %> text-light nav-link" href="/teste">Testes</a></li>
             </ul>
         </div>
+        
+        <div class="col-12 text-center">
+            <span>Usuário: <%= sessao %></span>
+           </div>
 
         <div class="container">
 

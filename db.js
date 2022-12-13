@@ -73,7 +73,7 @@ async function selectOs(id){
     const conn = await connect();
     const sql = "SELECT * FROM controle_demandas WHERE cod_os = ?";
     const [rows] = await conn.query(sql, [id.replace('-', '/')]);
-    return rows && rows.length > 0 ? rows[0] : {}; 
+    return rows && rows.length > 0 ? rows[0] : ''; 
 }
 
 /**Editando a O.S selecionada */

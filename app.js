@@ -34,7 +34,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

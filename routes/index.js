@@ -9,7 +9,15 @@ function ultima_atualizacao () {
 '/' + (data_hora_atual.getMonth() + 1) +  '/' + data_hora_atual.getFullYear();
 };
 
+function validaSessao(req, res, next){
+  if(!req.session.user) {
+    return res.redirect('/');
+  }
+  return next()
+} 
+  
 router.get('/', async function(req, res, next) {
+    req.session.user = null;
 
     res.render('login', 
     {
@@ -27,15 +35,15 @@ router.post('/', async function(req, res, next) {
 
     const user = req.body.user;
     const pass = req.body.pass;
-    const login = await global.db.login(user, pass);
+    const result = await global.db.login(user, pass);
+    req.session.user = result ? result[0].user : '-';
 
     res.render('login', 
     {
-      title: 'Login', mensagem: null,
-      alert: null, 
-      tempo_alerta: null,
+      title: 'Login',
       negrito: 'fw-bold', 
-      login
+      mensagem: result ? 'Usuário autorizado' : 'Usuário não autorizado. Verifique login e senha e tente novamente.',
+      alert: !result ? 'alert alert-danger' : res.redirect('/demandas-do-dia'), 
     });
   } catch (error){
     res.redirect('/erro='+error);
@@ -43,27 +51,46 @@ router.post('/', async function(req, res, next) {
 });
 
 /* GET home page. */
-/*router.get('/', async function(req, res, next) {
+router.get('/demandas-do-dia', validaSessao, async function(req, res, next) {
 
   try {
 
     const results = await global.db.demandasDoDia();
-    let sessao = req.session.name =  'IVONILSON';
-    res.render('index', 
+    res.render('demandas-do-dia', 
     {
       results, title: 'Controle de Demandas', mensagem: null, active: 'active', 
       alert: null, 
       tempo_alerta: null,
       negrito: 'fw-bold',
       ultima_atualizacao: ultima_atualizacao(),
-      sessao
+      user: req.session.user
     });
   } catch (error){
     res.redirect('/erro='+error);
   }
-});*/
+});
 
-router.get('/cadastrar-os', async function(req, res, next){
+/* GET home page. */
+router.get('/edit/demandas-do-dia', validaSessao, async function(req, res, next) {
+
+  try {
+
+    const results = await global.db.demandasDoDia();
+    res.render('demandas-do-dia', 
+    {
+      results, title: 'Controle de Demandas', mensagem: null, active: 'active', 
+      alert: null, 
+      tempo_alerta: null,
+      negrito: 'fw-bold',
+      ultima_atualizacao: ultima_atualizacao(),
+      user: req.session.user
+    });
+  } catch (error){
+    res.redirect('/erro='+error);
+  }
+});
+
+router.get('/cadastrar-os', validaSessao, async function(req, res, next){
   const cidades = await global.db.carregarcidade();
   const ufs = await global.db.carregarUF();
   res.render('cadastrar-os', 
@@ -72,7 +99,8 @@ router.get('/cadastrar-os', async function(req, res, next){
     active: 'active',
     negrito: 'fw-bold',
     cidades,
-    ufs
+    ufs,
+    user: req.session.user
   });
 });
 
@@ -96,7 +124,7 @@ router.post('/teste', async function(req, res){
     const results = await global.db.carregarDadosTeste();
     res.render('teste', 
     {
-      title: 'Teste', results, mensagem:  'Cadastrado com sucesso', 
+      title: 'Teste', results, mensagem:  'Cadastrado com sucesso', sessao: req.session.name,
       action: '/teste', active: 'active',
       alert: 'alert-info',
       tempo_alerta: 'mensagem-alerta-erro',
@@ -182,24 +210,18 @@ router.get('/edit/:id', async function (req, res){
     const result = await global.db.selectOs(id);
     const cidades = await global.db.carregarcidade();
     const ufs = await global.db.carregarUF();
-    res.render('editar-os', 
-    {
-    mensagem: null, result, cidades, ufs, title: 'O.S em Edição', action: '/edit/'+id, 
-    active: 'active', negrito: 'fw-bold'
-  });
+    res.render('editar-os',
+      {
+        mensagem: null, result, cidades, ufs, title: 'O.S em Edição', action: '/edit/'+id, 
+        active: 'active', negrito: 'fw-bold'
+      });
   } catch (error){
-    res.render('editar-os', 
-    {
-    mensagem: error, result, title: 'O.S. em edição', action: '/edit/'+id, 
-    active: 'active', negrito: 'fw-bold'
-  });
-    //res.redirect('/erro='+error);
+     res.redirect('/erro');
   }
 });
 
 /**Editando a O.S. selecionada */
 router.post('/edit/:id', async function(req, res){
-  let sessao = req.session.name =  'IVONILSON';
   const cod_os = req.params.id;
   const tipo = req.body.selTipo;
   const banco = req.body.selBanco;
@@ -239,7 +261,7 @@ router.post('/edit/:id', async function(req, res){
         observacoesIG, fichaPesquisa, numeroOperacao
     });
     const results = await global.db.demandasDoDia();
-    res.render('index'  , 
+    res.render('demandas-do-dia'  , 
     {
       results,
       mensagem: 'O.S. n° ' + cod_os.replace('-', '/') + ' atualizada com sucesso!', 
@@ -248,11 +270,8 @@ router.post('/edit/:id', async function(req, res){
       alert: 'alert-success',
       tempo_alerta: 'mensagem-alerta-erro',
       negrito: 'fw-bold',
-      ultima_atualizacao: ultima_atualizacao(),
-      sessao
-
+      ultima_atualizacao: ultima_atualizacao(), user: req.session.user
     });
-   
   } catch(error){
     //res.redirect('/?erro= '+error)
     const id = req.params.id;
@@ -269,8 +288,7 @@ router.post('/edit/:id', async function(req, res){
     alert: 'alert-danger',
     tempo_alerta: '',
     negrito: 'fw-bold',
-    ultima_atualizacao: ultima_atualizacao(),
-    sessao
+    ultima_atualizacao: ultima_atualizacao()
   });
   }
 });
@@ -281,7 +299,7 @@ router.get('/delete/:id', async function(req, res){
     await global.db.deletarOs(id);
     let sessao = req.session.name =  'IVONILSON';
     const results = await global.db.demandasDoDia();
-    res.render('index', 
+    res.render('demandas-do-dia', 
     {
       results,
       mensagem: 'O.S. n° ' + id.replace('-', '/') + ' deletada com sucesso!', 
