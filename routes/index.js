@@ -185,7 +185,8 @@ router.post('/cadastrar-os',  async function(req, res){
       tempo_alerta: 'mensagem-alerta-erro',
       negrito: 'fw-bold',
       cidades,
-      ufs
+      ufs,
+      user: req.session.user
     });
   } catch(error){
     const cidades = await global.db.carregarcidade();
@@ -198,7 +199,8 @@ router.post('/cadastrar-os',  async function(req, res){
       tempo_alerta: '',
       negrito: 'fw-bold',
       cidades,
-      ufs
+      ufs,
+      user: req.session.user
     });
   }
 });
